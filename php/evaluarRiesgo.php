@@ -23,9 +23,9 @@ if ($tiempo > 6) {
 }
 
 
-if ($costo > 100000) {
+if ($costo > 1000000) {
   $puntaje += 5;
-} else if ($costo > 50000) {
+} else if ($costo > 500000) {
   $puntaje += 3;
 } else {
   $puntaje += 1;
@@ -92,18 +92,91 @@ switch ($estabilidad_equipo) {
 }
 
 
-// Checklist
+
 $total_checklist = 0;
 if(isset($_POST['multi_tecnologia'])){
-    $total_checklist += 1;
+  $puntaje += 1;
 }
 if(isset($_POST['base_datos'])){
-    $total_checklist += 1;
+  $puntaje += 1;
 }
 if(isset($_POST['multiplataforma'])){
-    $total_checklist += 1;
+  $puntaje += 1;
 }
 
 
 
 
+?>
+
+<?php include '../template/header.php' ?>
+
+<?php
+    include_once "../model/conexion.php";
+    $sql="Select * from tblriesgos";
+    $resultado=$bd->query($sql);
+
+?>
+
+
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div>
+            
+            <button class="btn btn-primary" onclick="window.location.href='php/form.php'">Evaluar riesgos</button>
+        </div>
+        <div class="col-md-7">
+            
+                <?php  
+                if ($puntaje>40){
+                    echo"<div class='card>
+                    <div class='p-4 bg-warning'><div class='mb-3'> <h2 >Proyecto de alto riesgo</h2>
+                    <p>A continuacion le mostramos una serie de recomendaciones para aplicar</p>
+                          </div>               
+                    </div>
+                        </div><br>";
+                }elseif($puntaje>20){
+                  echo"<div class='card'>
+                  <div class='p-4'><div class='mb-3'> <h2>Proyecto de riesgo medio</h2>
+                  <p>A continuacion le mostramos una serie de recomendaciones para aplicar</p>
+                        </div>               
+                  </div>
+                      </div><br>";
+                }else{
+                  echo"<div class='card'>
+                  <div class='p-4'><div class='mb-3'> <h2>Proyecto de bajo riesgo</h2>
+                  <p>A continuacion le mostramos una serie de recomendaciones para aplicar</p>
+                        </div>               
+                  </div>
+                      </div><br>";
+                }
+                
+                
+                while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) { 
+                    echo"<div class='card'>
+                <div class='p-4'><div class='mb-3'> <h2>".$fila['titulo']."</h2>
+                        <p>"
+                        .$fila['descrip']."
+                        </p>
+                        <table class='table table-bordered'>
+                        <tr><th>Funcion</th><th>Descripcion</th></tr>
+                        <tr><td>Identificar</td><td>" . $fila["identificar"] . "</td></tr>
+                        <tr><td>analizar</td><td>" . $fila["analizar"] . "</td></tr>
+                        <tr><td>planear</td><td>" . $fila["planear"] . "</td></tr>
+                        <tr><td>seguir</td><td>" . $fila["seguir"] . "</td></tr>
+                        <tr><td>controlar</td><td>" . $fila["controlar"] . "</td></tr>
+                        <tr><td>comunicar</td><td>" . $fila["comunicar"] . "</td></tr>
+                        </table>
+                      </div>               
+                </div>
+                    </div><br>";
+                }?>
+
+        </div>
+    </div>
+</div>
+
+<?php include '../template/footer.php' ?>

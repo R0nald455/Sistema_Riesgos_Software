@@ -6,7 +6,7 @@
 
 
 
-    $sql="Select * from tblriesgo";
+    $sql="Select titulo,descrip from tblriesgos";
     $resultado=$bd->query($sql);
 
 ?>
