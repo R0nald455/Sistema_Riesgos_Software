@@ -4,6 +4,7 @@ $tiempo = $_POST['tiempo'];
 $equipo = $_POST['equipo'];
 $tamano = $_POST['tamano'];
 $costo = $_POST['costo'];
+$disponibilidad = $_POST['disponibilidad'];
 $modalidad = $_POST['modalidad'];
 $casos_uso = $_POST['casos_uso'];
 $presupuesto = $_POST['presupuesto'];
@@ -39,6 +40,18 @@ if ($equipo > 5) {
   $puntaje += 1;
 }
 
+switch ($disponibilidad) {
+  case 'alta':
+     $puntaje +=1;
+    break;
+  case 'media' :
+    $puntaje +=3;
+    break;
+  case 'baja' :
+    $puntaje +=5;
+    break;
+}
+
 switch ($tamano) {
   case 'pequeno':
     $puntaje += 1;
@@ -49,6 +62,15 @@ switch ($tamano) {
   case 'grande':
     $puntaje += 5;
     break;
+}
+
+  switch ($modalidad) {
+    case 'presencial':
+      $puntaje += 1;
+      break;
+    case 'remoto':
+      $puntaje += 2;
+      break;
 }
 
 if ($casos_uso > 50) {
@@ -124,10 +146,7 @@ if(isset($_POST['multiplataforma'])){
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div>
-            
-            <button class="btn btn-primary" onclick="window.location.href='php/form.php'">Evaluar riesgos</button>
-        </div>
+
         <div class="col-md-7">
             
                 <?php  

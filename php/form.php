@@ -41,7 +41,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="disponibilidad_recursos"class="form-label">Disponibilidad de recursos:</label>
-                        <select id="disponibilidad_recursos"class="form-control"name="disponibilidad_recursos">
+                        <select id="disponibilidad"class="form-control"name="disponibilidad">
                             <option value="alta">Alta</option>
                             <option value="media">Media</option>
                             <option value="baja">Baja</option>

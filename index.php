@@ -2,13 +2,8 @@
 
 <?php
     include_once "model/conexion.php";
-
-
-
-
     $sql="Select titulo,descrip from tblriesgos";
     $resultado=$bd->query($sql);
-
 ?>
 
 
