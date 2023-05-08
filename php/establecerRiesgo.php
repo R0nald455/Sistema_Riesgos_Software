@@ -1,51 +1,42 @@
 <?php
-
-$sql="Select id,probabilidad,impacto from tblriesgos ";
-$resultado=$bd->query($sql);
-
-
-
-
+ $sql="Select id,probabilidad,impacto from tblriesgos ";
+ $resultado=$bd->query($sql);
 
 while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) { 
     $id=$fila['id'];
-    $nivelRiesgo=$fila['impacto']*$fila['probabilidad'];
-    $riesgo="nulo";
-    if($nivelRiesgo>=20){
-        $riesgo="Muy Alto";
-        $update="UPDATE `tblriesgos` SET `riesgo`=:valor1 WHERE id= :condicion";
+    if ($puntaje >= 35){
+        $suma = $fila['probabilidad'] +=1;
+        if($suma>=6){$suma=5;}
+        $update="UPDATE `tblriesgos` SET `probabilidad`= :valor1 WHERE id= :condicion" ;
         $stmt = $bd->prepare($update); 
-        $stmt->bindParam(':valor1', $riesgo);
+        $stmt->bindParam(':valor1', $suma);
         $stmt->bindParam(':condicion', $id);
-        $stmt->execute();    
-    }elseif($nivelRiesgo>=15){
-        $riesgo="Alto";
-        $update="UPDATE `tblriesgos` SET `riesgo`=:valor1 WHERE id= :condicion";
-        $stmt = $bd->prepare($update); 
-        $stmt->bindParam(':valor1', $riesgo);
-        $stmt->bindParam(':condicion', $id);
-        $stmt->execute();    
-    }elseif($nivelRiesgo>=9){
-        $riesgo="Medio";
-        $update="UPDATE `tblriesgos` SET `riesgo`=:valor1 WHERE id= :condicion";
-        $stmt = $bd->prepare($update); 
-        $stmt->bindParam(':valor1', $riesgo);
-        $stmt->bindParam(':condicion', $id);
-        $stmt->execute();    
-    }elseif($nivelRiesgo>=6){
-        $riesgo="Bajo";
-        $update="UPDATE `tblriesgos` SET `riesgo`=:valor1 WHERE id= :condicion";
-        $stmt = $bd->prepare($update); 
-        $stmt->bindParam(':valor1', $riesgo);
-        $stmt->bindParam(':condicion', $id);
-        $stmt->execute();    
-    }else{
-        $riesgo="Muy Bajo";
-        $update="UPDATE `tblriesgos` SET `riesgo`=:valor1 WHERE id= :condicion";
-        $stmt = $bd->prepare($update); 
-        $stmt->bindParam(':valor1', $riesgo);
-        $stmt->bindParam(':condicion', $id);
-        $stmt->execute();    
+        $stmt->execute();  
+    }elseif($puntaje <=20){
+            $resta = $fila['probabilidad'] -=1;
+            if($resta==0){$resta=1;}
+            $update="UPDATE `tblriesgos` SET `probabilidad`= :valor1 WHERE id= :condicion" ;
+            $stmt = $bd->prepare($update); 
+            $stmt->bindParam(':valor1', $resta);
+            $stmt->bindParam(':condicion', $id);
+            $stmt->execute();  
     }
+}
+
+
+
+
+
+
+$sql="Select id,probabilidad,impacto from tblriesgos ";
+$resultado=$bd->query($sql);  
+while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) { 
+    $id=$fila['id'];
+    $nivelRiesgo=$fila['impacto']*$fila['probabilidad'];
+        $update="UPDATE `tblriesgos` SET `riesgo`=:valor1 WHERE id= :condicion";
+        $stmt = $bd->prepare($update); 
+        $stmt->bindParam(':valor1', $nivelRiesgo);
+        $stmt->bindParam(':condicion', $id);
+        $stmt->execute();    
 }
 ?>
