@@ -182,8 +182,8 @@ if(isset($_POST['multiplataforma'])){
                 <div class='p-4'><div class='mb-3'> <h2>".$fila['titulo']."</h2><a href='matriz.php?riesgo=".$fila['id']."'>Ver matriz</a>
                         <p>"
                         .$fila['descrip']."
-                        </p>
-                        <table class='table table-bordered'>
+                        </p>".
+/*                         <table class='table table-bordered'>
                         <tr><th>Funcion</th><th>Descripcion</th></tr>
                         <tr><td>Identificar</td><td>" . $fila["identificar"] . "</td></tr>
                         <tr><td>analizar</td><td>" . $fila["analizar"] . "</td></tr>
@@ -191,7 +191,7 @@ if(isset($_POST['multiplataforma'])){
                         <tr><td>seguir</td><td>" . $fila["seguir"] . "</td></tr>
                         <tr><td>controlar</td><td>" . $fila["controlar"] . "</td></tr>
                         <tr><td>comunicar</td><td>" . $fila["comunicar"] . "</td></tr>
-                        </table>
+                        </table> */"
                       </div>               
                 </div>
                     </div><br>";
