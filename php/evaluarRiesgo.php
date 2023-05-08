@@ -16,11 +16,11 @@ $estabilidad_equipo = $_POST['estabilidad_equipo'];
 $puntaje = 0;
 
 if ($tiempo > 6) {
-  $puntaje += 5;
+  $puntaje += 1;
 } else if ($tiempo > 3) {
   $puntaje += 3;
 } else {
-  $puntaje += 1;
+  $puntaje += 5;
 }
 
 
@@ -73,7 +73,7 @@ switch ($tamano) {
       break;
 }
 
-if ($casos_uso > 50) {
+if ($casos_uso > 20) {
   $puntaje += 5;
 } else if ($casos_uso > 20) {
   $puntaje += 3;
@@ -83,7 +83,7 @@ if ($casos_uso > 50) {
 
 if ($presupuesto < $costo) {
   $puntaje += 5;
-} else if ($presupuesto < ($costo * 1.5)) {
+} else if ($presupuesto < ($costo * 0.5)) {
   $puntaje += 3;
 } else {
   $puntaje += 1;
@@ -117,13 +117,13 @@ switch ($estabilidad_equipo) {
 
 $total_checklist = 0;
 if(isset($_POST['multi_tecnologia'])){
-  $puntaje += 1;
+  $puntaje += 2;
 }
 if(isset($_POST['base_datos'])){
-  $puntaje += 1;
+  $puntaje += 2;
 }
 if(isset($_POST['multiplataforma'])){
-  $puntaje += 1;
+  $puntaje += 2;
 }
 
 
@@ -146,18 +146,21 @@ if(isset($_POST['multiplataforma'])){
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-
+    <div>
+            
+            <button class="btn btn-primary" onclick="window.location.href='resumen.php'">Ver Resumen</button>
+        </div>
         <div class="col-md-7">
             
                 <?php  
-                if ($puntaje>40){
+                if ($puntaje>=35){
                     echo"<div class='card>
                     <div class='p-4 bg-warning'><div class='mb-3'> <h2 >Proyecto de alto riesgo</h2>
                     <p>A continuacion le mostramos una serie de recomendaciones para aplicar</p>
                           </div>               
                     </div>
                         </div><br>";
-                }elseif($puntaje>20){
+                }elseif($puntaje>=20){
                   echo"<div class='card'>
                   <div class='p-4'><div class='mb-3'> <h2>Proyecto de riesgo medio</h2>
                   <p>A continuacion le mostramos una serie de recomendaciones para aplicar</p>
@@ -176,7 +179,7 @@ if(isset($_POST['multiplataforma'])){
                 
                 while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) { 
                     echo"<div class='card'>
-                <div class='p-4'><div class='mb-3'> <h2>".$fila['titulo']."</h2>
+                <div class='p-4'><div class='mb-3'> <h2>".$fila['titulo']."</h2><a href='matriz.php?riesgo=".$fila['id']."'>Ver matriz</a>
                         <p>"
                         .$fila['descrip']."
                         </p>
@@ -198,4 +201,6 @@ if(isset($_POST['multiplataforma'])){
     </div>
 </div>
 
-<?php include '../template/footer.php' ?>
+<?php include '../template/footer.php';
+include 'establecerRiesgo.php';
+?>
