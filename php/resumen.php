@@ -115,7 +115,6 @@
     <br>
     <table >
 
-      <thead>
         <tr>
           <th></th>
           <th>Insignificante</th>
@@ -125,48 +124,48 @@
           <th >Catastrofico</th>
         </tr>
       </thead>    
-      <tbody>
+      
         <tr>
-          <td >Raro</td>
-          <td ><?php echo numero($resultado,1);?></td>
-          <td ><?php echo numero($resultado,2);?></td>
-          <td ><?php echo  numero($resultado,3);?></td>
-          <td ><?php echo numero($resultado,4);?></td>
-          <td ><?php echo numero($resultado,5);?></td>          
+          <td>Raro</td>
+          <td class='<?php echo color2($resultado,1);?>' ><?php echo numero($resultado,1);?></td>
+          <td class='<?php echo color2($resultado,2);?>' ><?php echo numero($resultado,2);?></td>
+          <td class='<?php echo color2($resultado,3);?>' ><?php echo  numero($resultado,3);?></td>
+          <td class='<?php echo color2($resultado,4);?>' ><?php echo numero($resultado,4);?></td>
+          <td class='<?php echo color2($resultado,4);?>' ><?php echo numero($resultado,5);?></td>          
         </tr>
         <tr>
           <td>Improbable</td>
-          <td ><?php echo numero($resultado,6);?></td>
-          <td ><?php echo numero($resultado,7);?></td>
-          <td ><?php echo numero($resultado,8);?></td>
-          <td ><?php echo numero($resultado,9);?></td>
-          <td ><?php echo numero($resultado,10);?></td>
+          <td class='<?php echo color2($resultado,6);?>' ><?php echo numero($resultado,6);?></td>
+          <td class='<?php echo color2($resultado,7);?>' ><?php echo numero($resultado,7);?></td>
+          <td class='<?php echo color2($resultado,8);?>' ><?php echo numero($resultado,8);?></td>
+          <td class='<?php echo color2($resultado,9);?>' ><?php echo numero($resultado,9);?></td>
+          <td class='<?php echo color2($resultado,10);?>' ><?php echo numero($resultado,10);?></td>
         </tr>
         <tr>
           <td>Posible</td>
-          <td ><?php echo numero($resultado,11);;?></td>
-          <td ><?php echo numero($resultado,12);;?></td>
-          <td ><?php echo numero($resultado,13);;?></td>
-          <td ><?php echo numero($resultado,14);;?></td>
-          <td ><?php echo numero($resultado,15);;?></td>
+          <td class='<?php echo color2($resultado,11);?>' ><?php echo numero($resultado,11);?></td>
+          <td class='<?php echo color2($resultado,12);?>' ><?php echo numero($resultado,12);?></td>
+          <td class='<?php echo color2($resultado,13);?>' ><?php echo numero($resultado,13);?></td>
+          <td class='<?php echo color2($resultado,14);?>' ><?php echo numero($resultado,14);?></td>
+          <td class='<?php echo color2($resultado,15);?>' ><?php echo numero($resultado,15);?></td>
         </tr>
         <tr>
           <td>Problamente</td>
-          <td ><?php  echo numero($resultado,16);;?></td>
-          <td ><?php  echo numero($resultado,17);;?></td>
-          <td ><?php  echo numero($resultado,18);;?></td>
-          <td ><?php echo numero($resultado,19);;?></td>
-          <td></td> <?php  echo numero($resultado,20);;?></td>
+          <td class='<?php echo color2($resultado,16);?>' ><?php  echo numero($resultado,16);?></td>
+          <td class='<?php echo color2($resultado,17);?>' ><?php  echo numero($resultado,17);?></td>
+          <td class='<?php echo color2($resultado,18);?>' ><?php  echo numero($resultado,18);?></td>
+          <td class='<?php echo color2($resultado,19);?>' ><?php echo numero($resultado,19);?></td>
+          <td class='<?php echo color2($resultado,20);?>' > <?php  echo numero($resultado,20);?></td>
         </tr>
         <tr>
           <td>Casi seguro</td>
-          <td><?php  echo numero($resultado,21);;?></td>
-          <td ><?php  echo numero($resultado,22);?></td>
-          <td ><?php  echo numero($resultado,23);?></td>
-          <td ></td><?php  echo numero($resultado,24);?></td>
-          <td ></td><?php  echo numero($resultado,25);?></td>
+          <td class='<?php echo color2($resultado,21);?>' ><?php  echo numero($resultado,21);;?></td>
+          <td class='<?php echo color2($resultado,22);?>' ><?php  echo numero($resultado,22);?></td>
+          <td class='<?php echo color2($resultado,23);?>' ><?php  echo numero($resultado,23);?></td>
+          <td class='<?php echo color2($resultado,24);?>' ><?php  echo numero($resultado,24);?></td>
+          <td class='<?php echo color2($resultado,25);?>' ><?php  echo numero($resultado,25);?></td>
         </tr>
-      </tbody>
+      
     </table>
 
 
@@ -197,7 +196,23 @@ if(isset($resultado[$dato])){
 }
 }
 
-
+function color2($resultado,$dato){
+  if(isset($resultado[$dato])){
+    $valor=$resultado[$dato];
+    if($valor>=4){
+      return "muyAlto";
+    }elseif($valor>=3){
+      return "Alto";
+    }elseif($valor>2){
+      return "";
+    }elseif($valor>1){
+      return "Bajo";
+    }else{
+      return "muyBajo";
+    }
+  }else{
+  }
+}
 
 function color($dato){
     switch ($dato) {
